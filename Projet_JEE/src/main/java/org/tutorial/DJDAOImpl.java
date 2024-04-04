@@ -22,7 +22,7 @@ public class DJDAOImpl implements DJDAO{
         	statement = connection.createStatement();
 			rs = statement.executeQuery(query);
             while (rs.next()) {
-            	int ID_DJ = rs.getInt("ID_DJ");
+            	Integer ID_DJ = rs.getInt("ID_DJ");
                 String Nom = rs.getString("Nom");
                 String Prenom = rs.getString("Prenom");
                 String Pseudo = rs.getString("Pseudo");
@@ -98,7 +98,6 @@ public class DJDAOImpl implements DJDAO{
 	        statement.setString(6, dj.getContinent());
 	        statement.setString(7, dj.getStyle());
 	        statement.setInt(8, dj.getActif());
-	        	        
 	        
 	        int rowsInserted = statement.executeUpdate();
 	        if (rowsInserted > 0) {
@@ -148,7 +147,7 @@ public class DJDAOImpl implements DJDAO{
 	        e.printStackTrace();
 	        return false;
 	    } finally {
-	        // On ferme les ressources JDBC dans le bloc finally
+	        // On ferme les ressources JDBC dans le finally
 	        try {
 	            if (statement != null) {
 	                statement.close();

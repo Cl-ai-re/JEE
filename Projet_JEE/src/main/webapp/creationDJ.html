@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Créer un DJ</title>
+</head>
+
+<body >
+
+<table>
+<tr>
+<th> <a href='index.html'>Accueil</a></th>
+<th> <a href='creationDJ.html'>Ajouter un DJ</a></th>
+<th> <a href='creationEvent.html'>Ajouter un évènement</a></th>
+<th> <a href='afficherDJ.html'>Afficher les DJ</a></th>
+<th> <a href='AfficherEvent.html'>Afficher les evenements</a></th>
+<th> <a href='AfficherLieux.html'>Afficher les lieux</a></th>
+<th> <a href='AfficherTopDJ.html'>Afficher le top des DJ</a></th>
+</tr>
+</table>
+
+
+<div id="Nouveau_DJ"></div>
+</body>
+
+</html>
+
+<form action="/Projet_JEE/api/DJ/Ajout" method="POST">
+  <ul>
+    <li>
+      <label for="Nom">Nom : </label>
+      <input type="text" id="Nom" name="Nom" />
+    </li>
+    <li>
+      <label for="Nom">Prenom : </label>
+      <input type="text" id="Prenom" name="Prenom" />
+    </li>
+     <li>
+      <label for="Pseudo">Pseudo :</label>
+      <input type="text" id="Pseudo" name="Pseudo" />
+    </li>
+    <li>
+      <label for="Date_de_naissance">Date de naissance : </label>
+      <input type="date" id="Date_de_naissance" name="Date_de_naissance" />
+    </li>
+    <li>
+      <label for="Adresse">Adresse :</label>
+      <input type="text" id="Adresse" name="Adresse" />
+    </li>
+             
+   <fieldset>
+  <legend>Sélectionner un continent : </legend>
+  <div>
+    <input type="radio" id="Europe" name="Continent" value="Europe" checked />
+    <label for="Europe">Europe</label>
+  </div>
+
+  <div>
+    <input type="radio" id="Asie" name="Continent" value="Asie" />
+    <label for="Asie">Asie</label>
+  </div>
+
+  <div>
+    <input type="radio" id="Amérique du Sud" name="Continent" value="Amérique du Sud" />
+    <label for="Amérique du Sud">Amérique du Sud</label>
+  </div>
+    <div>
+    <input type="radio" id="Amérique du Nord" name="Continent" value="Amérique du Nord" />
+    <label for="Amérique du Nord">Amérique du Nord</label>
+  </div>
+      <div>
+    <input type="radio" id="Amérique Centrale" name="Continent" value="Amérique Centrale" />
+    <label for="Amérique Centrale">Amérique Centrale</label>
+  </div>
+      <div>
+    <input type="radio" id="Afrique" name="Continent" value="Afrique" />
+    <label for="Afrique">Afrique</label>
+  </div>
+     <div>
+    <input type="radio" id="Oceanie" name="Continent" value="Oceanie" />
+    <label for="Oceanie">Oceanie</label>
+  </div>
+    </fieldset>
+    
+   <fieldset>
+  <legend>Sélectionner un style : </legend>
+  <div>
+    <input type="radio" id="Hard Style" name="Style" value="Hard Style" checked />
+    <label for="Hard Style">Hard Style</label>
+  </div>
+  
+    <div>
+    <input type="radio" id="EDM" name="Style" value="EDM"  />
+    <label for="EDM">EDM</label>
+  </div>
+    <div>
+    <input type="radio" id="House" name="Style" value="House"  />
+    <label for="House">House</label>
+  </div>
+   <div>
+    <input type="radio" id="Electro" name="Style" value="Electro"  />
+    <label for="Electro">Electro</label>
+  </div>
+  
+  
+  </fieldset>
+  
+  <input type="submit" id="submitButton" />
+
+ 
+  </ul>
+</form>

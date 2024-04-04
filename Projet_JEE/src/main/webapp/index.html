@@ -1,10 +1,102 @@
-<!DOCTYPE html>
-<html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
 <head>
-<meta charset="ISO-8859-1">
-<title>Projet JEE</title>
-</head>
-<body>
-<h1>Hello </h1>
+<style>
+table, th, td {
+  border: 1px solid;
+  padding:5px;
+}
+table {
+  border-collapse: collapse;
+}
+div {
+margin-top: 10px;}
+</style>
+<script>
+function loadDJ(url) {
+	fetch(url)
+	.then(response => response.json())
+	.then(response => process(response))
+	.catch(error => alert("Erreur : " + error));
+}
+
+
+
+function process(DJ) {
+	var DJlist = document.getElementById("DJlist");
+	
+	if (DJlist.hasChildNodes()) {
+		DJlist.removeChild(DJlist.firstChild);
+	}
+	
+	var table = document.createElement("table");
+	DJlist.appendChild(table);
+	
+	console.log(DJ);
+	for (var dj of DJ) {
+		console.log(dj);
+		var tr = document.createElement("tr");
+		
+		var td_id = document.createElement("td");
+		td_id.append(dj.ID_DJ);
+		var td_nom = document.createElement("td");
+		td_nom.append(dj.Nom);
+		var td_prenom = document.createElement("td");
+		td_prenom.append(dj.Prenom);
+		var td_pseudo = document.createElement("td");
+		td_pseudo.append(dj.Pseudo);
+		var td_date_de_naissance = document.createElement("td");
+		td_date_de_naissance.append(dj.Date_de_Naissance);
+		var td_adresse = document.createElement("td");
+		td_adresse.append(dj.Adresse);
+		var td_continent = document.createElement("td");
+		td_continent.append(dj.Continent);
+		var td_style = document.createElement("td");
+		td_style.append(dj.Style);
+		var td_actif = document.createElement("td");
+		td_actif.append(dj.Actif);
+		
+		tr.appendChild(td_id);
+		tr.appendChild(td_nom);
+		tr.appendChild(td_prenom);
+		tr.appendChild(td_pseudo);
+		tr.appendChild(td_date_de_naissance);
+		tr.appendChild(td_adresse);
+		tr.appendChild(td_continent);
+		tr.appendChild(td_style);
+		tr.appendChild(td_actif);
+		
+		table.appendChild(tr);
+	}
+}
+
+
+function searchByName() {
+	//TODO
+}
+
+
+</script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">4700.00000000000</mso:Order>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:ContentTypeId msdt:dt="string">0x010100CECC21A3AFC6F54C9B75756AF591E856</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+<title></title></head>
+<body onload="loadDJ('/Projet_JEE/api/DJ/Liste')">
+
+<h1>Liste des DJ</h1>
+
+<div id="DJlist"></div>
+
 </body>
 </html>

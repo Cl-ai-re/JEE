@@ -1,16 +1,7 @@
 <html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<link href="./CSS/style.css" rel="stylesheet" type="text/css" />
 <head>
-<style>
-table, th, td {
-  border: 1px solid;
-  padding:5px;
-}
-table {
-  border-collapse: collapse;
-}
-div {
-margin-top: 10px;}
-</style>
+
 <script>
 function loadDJ(url) {
 	fetch(url)
@@ -28,8 +19,71 @@ function process(DJ) {
 		DJlist.removeChild(DJlist.firstChild);
 	}
 	
+	var menu = document.createElement("table");
+	DJlist.appendChild(menu);
+	
+	var tr_menu = document.createElement("tr");
+	
+	var td_DJ = document.createElement("button");
+	td_DJ.append("DJ");
+	var td_Evenements = document.createElement("button");
+	td_Evenements.append("Evenements");
+	var td_Lieux = document.createElement("button");
+	td_Lieux.append("Lieux");
+	
+	tr_menu.appendChild(td_DJ);
+	tr_menu.appendChild(td_Evenements);
+	tr_menu.appendChild(td_Lieux);
+	
+	menu.appendChild(tr_menu);
+	
+	var nouv_DJ = document.createElement("button");
+	nouv_DJ.textContent = 'Ajouter un DJ';
+	DJlist.appendChild(nouv_DJ);
+	
+	nouv_DJ.addEventListener('click', function(e){
+		console.log('Click!');
+		document.location.href="http://localhost:8080/Projet_JEE/creationDJ.html";
+	});
+	
 	var table = document.createElement("table");
 	DJlist.appendChild(table);
+	
+	var tr_en_tete = document.createElement("tr");
+	
+	var td_id_en_tete = document.createElement("td");
+	td_id_en_tete.append("ID_DJ");
+	var td_nom_en_tete = document.createElement("td");
+	td_nom_en_tete.append("Nom");
+	var td_prenom_en_tete = document.createElement("td");
+	td_prenom_en_tete.append("Prenom");
+	var td_pseudo_en_tete = document.createElement("td");
+	td_pseudo_en_tete.append("Pseudo");
+	var td_date_de_naissance_en_tete = document.createElement("td");
+	td_date_de_naissance_en_tete.append("Date_de_Naissance");
+	var td_adresse_en_tete = document.createElement("td");
+	td_adresse_en_tete.append("Adresse");
+	var td_continent_en_tete = document.createElement("td");
+	td_continent_en_tete.append("Continent");
+	var td_style_en_tete = document.createElement("td");
+	td_style_en_tete.append("Style");
+	var td_actif_en_tete = document.createElement("td");
+	td_actif_en_tete.append("Actif");
+	var td_mod_sup_en_tete = document.createElement("td");
+	td_mod_sup_en_tete.append("Modif/Sup");
+	
+	tr_en_tete.appendChild(td_id_en_tete);
+	tr_en_tete.appendChild(td_nom_en_tete);
+	tr_en_tete.appendChild(td_prenom_en_tete);
+	tr_en_tete.appendChild(td_pseudo_en_tete);
+	tr_en_tete.appendChild(td_date_de_naissance_en_tete);
+	tr_en_tete.appendChild(td_adresse_en_tete);
+	tr_en_tete.appendChild(td_continent_en_tete);
+	tr_en_tete.appendChild(td_style_en_tete);
+	tr_en_tete.appendChild(td_actif_en_tete);
+	tr_en_tete.appendChild(td_mod_sup_en_tete);
+	
+	table.appendChild(tr_en_tete);
 	
 	console.log(DJ);
 	for (var dj of DJ) {
@@ -55,6 +109,25 @@ function process(DJ) {
 		var td_actif = document.createElement("td");
 		td_actif.append(dj.Actif);
 		
+		var boutonModif = document.createElement('button');
+		boutonModif.textContent = 'Modifier';
+		boutonModif.setAttribute("id", dj.ID_DJ);
+		
+		boutonModif.addEventListener('click', function(e){
+			var ID_DJ = this.getAttribute("id")
+			document.location.href = "http://localhost:8080/Projet_JEE/modificationDJ.html?id=" + encodeURIComponent(ID_DJ);
+			});
+		
+		var boutonSup = document.createElement('button');
+		boutonSup.textContent = 'Supprimer';
+		boutonSup.setAttribute("id", dj.ID_DJ);
+		
+		boutonSup.addEventListener('click', function(e){
+			var ID_DJ = this.getAttribute("id");
+			document.location.href="http://localhost:8080/Projet_JEE/api/DJ/Suppression?ID_DJ="+ID_DJ;
+		});
+		
+		
 		tr.appendChild(td_id);
 		tr.appendChild(td_nom);
 		tr.appendChild(td_prenom);
@@ -64,6 +137,14 @@ function process(DJ) {
 		tr.appendChild(td_continent);
 		tr.appendChild(td_style);
 		tr.appendChild(td_actif);
+		
+		tr.appendChild(boutonModif);
+		tr.appendChild(boutonSup);
+		
+		// A modifier
+		boutonModif.addEventListener('click', function(e){
+		
+		});
 		
 		table.appendChild(tr);
 	}
@@ -91,10 +172,15 @@ function searchByName() {
 <mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
 </mso:CustomDocumentProperties>
 </xml><![endif]-->
-<title></title></head>
+<title>Projet JEE Team Nick Fury</title></head>
 <body onload="loadDJ('/Projet_JEE/api/DJ/Liste')">
 
-<h1>Liste des DJ</h1>
+
+<table>
+<tr>
+<td> <h1>Liste des DJ</h1>  </td>
+</tr>
+</table>
 
 <div id="DJlist"></div>
 

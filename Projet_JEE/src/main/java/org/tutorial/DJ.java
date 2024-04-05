@@ -1,7 +1,7 @@
 package org.tutorial;
 
 public class DJ {
-	private int ID_DJ;
+	private Integer ID_DJ;
 	private String Nom;
 	private String Prenom;
 	private String Pseudo;
@@ -12,7 +12,7 @@ public class DJ {
 	private Integer Actif;
 	
 	
-	public DJ(int Id, String Nom,String Prenom,String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
+	public DJ(Integer Id, String Nom,String Prenom,String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
 		this.ID_DJ = Id;
 		this.Nom = Nom;
 		this.Prenom = Prenom;
@@ -24,13 +24,24 @@ public class DJ {
 		this.Actif = Actif;
 	}
 
+	public DJ(String Nom,String Prenom,String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
+		this.ID_DJ = -1; // L'ID sera défini dans la base à l'ajout par auto-incrément.
+		this.Nom = Nom;
+		this.Prenom = Prenom;
+		this.Pseudo = Pseudo;
+		this.Date_de_Naissance = DateNaissance;
+		this.Adresse = LieuResidence;
+		this.Continent = Continent;
+		this.Style = StyleMusical;
+		this.Actif = Actif;
+	}
 
-	public int getID_DJ() {
+	public Integer getID_DJ() {
 		return ID_DJ;
 	}
 
 
-	public void setID_DJ(int iD_DJ) {
+	public void setID_DJ(Integer iD_DJ) {
 		ID_DJ = iD_DJ;
 	}
 

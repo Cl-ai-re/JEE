@@ -9,8 +9,10 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
@@ -51,10 +53,28 @@ public class DJController {
 		}
 	}
 
+	// On a essayé d'utilisé @DELETE mais on récupérait toujours une erreur 405
+	@GET
+	@Path("/Suppression")
+	public void deleteDJ (@QueryParam("ID_DJ") Integer ID_DJ) {
+		try {
+			DJDAOImpl.deleteDJ(ID_DJ);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-
-
-
+	@GET
+	@Path("/Modification")
+	public void updateDJ (@QueryParam("ID_DJ") Integer ID_DJ) {
+		//@FormParam("ID_DJ") Integer ID_DJ, @FormParam("Nom") String Nom, @FormParam("Prenom") String Prenom, @FormParam("Pseudo") String Pseudo, @FormParam("Date_de_naissance") String Date_de_naissance, @FormParam("Adresse") String Adresse, @FormParam("Continent") String Continent, @FormParam("Style") String Style)
+		DJ modif_DJ = DJDAOImpl.findById(ID_DJ); //= new DJ (Nom, Prenom, Pseudo, Date_de_naissance, Adresse, Continent, Style, 1);
+		try {
+			DJDAOImpl.updateDJ(modif_DJ);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 
 

@@ -47,34 +47,50 @@ public class DJDAOImpl implements DJDAO{
 		return findByQueryDJ("select * from DJ");
 	}
 	
+	public DJ findById(Integer ID_DJ) {
+		return findByQueryDJ("select * from DJ where ID_DJ = " + ID_DJ.toString() + ";").get(0);
+	}
+	
 	public List<DJ> findByNom(String searchText) {
-		return findByQueryDJ("select * from DJ where Nom like %" + searchText + "%");
+		return findByQueryDJ("select * from DJ where Nom like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByPrenom(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Prenom like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByPseudo(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Pseudo like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByDate_de_naissance(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Date_de_naissance like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByAdresse(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Adresse like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByContinent(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Continent like '%" + searchText + "%'");
 	}
-	
+
 	public List<DJ> findByStyle(String searchText) {
-		return findByQueryDJ("select * from DJ");
+		return findByQueryDJ("select * from DJ where Style like '%" + searchText + "%'");
 	}
-	
+
+	/*
+	public List<Evenement> findByDate(String searchText) {
+		return findByQueryEvenement("select * from Evenement where Date_evenement like '%" + searchText + "%'");
+	}
+
+	public List<Evenement> findByDJ(String searchText) {
+		return findByQueryEvenement("select * from Evenement where ID_Evenement like '%" + searchText + "%'");
+	}
+
+	public List<Evenement> findByLieu(String searchText) {
+		return findByQueryEvenement("select * from Evenement where ID_Lieu like '%" + searchText + "%'");
+	*/
 	
 	// Méthode pour insérer un nouveau DJ dans la base de données
 	public void insertDJ(DJ dj) {
@@ -121,7 +137,10 @@ public class DJDAOImpl implements DJDAO{
 	}
 	
 	// Méthode pour supprimer un DJ de la base de données en utilisant son ID
-	public boolean deleteDJ(int ID_DJ) {
+	// Il s'agit plus d'une désactivation que d'une suppression en fait.
+	// On désactive seulement le DJ car il s'agit d'une clé étrangère dans les tables.
+	// Cela évite de devoir supprimer toutes les ressources qui lui sont associées.
+	public void deleteDJ(Integer ID_DJ) {
 	    Connection connection = null;
 	    PreparedStatement statement = null;
 	    
@@ -130,22 +149,19 @@ public class DJDAOImpl implements DJDAO{
 	        if (connection == null) {
 	            throw new SQLException("La connexion à la base de données a échoué.");
 	        }
-	        
-	        String query = "DELETE FROM DJ WHERE id = ?";
+	        System.out.println(ID_DJ);
+	        String query = "CALL supp_DJ (?);";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, ID_DJ);
 	        
 	        int rowsDeleted = statement.executeUpdate();
 	        if (rowsDeleted > 0) {
-	            System.out.println("DJ avec l'ID : " + ID_DJ + " supprimé de la base de données.");
-	            return true;
+	            System.out.println("DJ avec l'ID : " + ID_DJ + " désactivé dans la base de données.");
 	        } else {
 	            System.out.println("Aucun DJ trouvé avec l'ID : " + ID_DJ + ".");
-	            return false;
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        return false;
 	    } finally {
 	        // On ferme les ressources JDBC dans le finally
 	        try {
@@ -160,4 +176,56 @@ public class DJDAOImpl implements DJDAO{
 	        }
 	    }
 	}
+	
+	public void updateDJ(DJ dj) {
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    
+	    try {
+	        connection = DBManager.getInstance().getConnection();
+	        if (connection == null) {
+	            throw new SQLException("La connexion à la base de données a échoué.");
+	        }
+	        
+	        String query = "CALL modif_DJ('?','?','?','?','?','?','?','?','?');";
+	        
+	        
+	        statement = connection.prepareStatement(query);
+	        statement.setInt(1, dj.getID_DJ());
+	        statement.setString(2, dj.getNom());
+	        statement.setString(3, dj.getPrenom());
+	        statement.setString(4, dj.getPseudo());
+	        statement.setString(5, dj.getDate_de_Naissance());
+	        statement.setString(6, dj.getAdresse());
+	        statement.setString(7, dj.getContinent());
+	        statement.setString(8, dj.getStyle());
+	        statement.setInt(9, dj.getActif());
+	        
+	        int rowsDeleted = statement.executeUpdate();
+	        if (rowsDeleted > 0) {
+	            System.out.println("DJ avec l'ID : " + dj.getID_DJ() + " modifié dans la base de données.");
+	        } else {
+	            System.out.println("Aucun DJ trouvé avec l'ID : " + dj.getID_DJ() + ".");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // On ferme les ressources JDBC dans le finally
+	        try {
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}	
+	
+	
+	
+	
+	
 }

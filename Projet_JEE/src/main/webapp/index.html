@@ -111,8 +111,22 @@ function process(DJ) {
 		
 		var boutonModif = document.createElement('button');
 		boutonModif.textContent = 'Modifier';
+		boutonModif.setAttribute("id", dj.ID_DJ);
+		
+		boutonModif.addEventListener('click', function(e){
+			var ID_DJ = this.getAttribute("id")
+			document.location.href = "http://localhost:8080/Projet_JEE/modificationDJ.html?id=" + encodeURIComponent(ID_DJ);
+			});
+		
 		var boutonSup = document.createElement('button');
 		boutonSup.textContent = 'Supprimer';
+		boutonSup.setAttribute("id", dj.ID_DJ);
+		
+		boutonSup.addEventListener('click', function(e){
+			var ID_DJ = this.getAttribute("id");
+			document.location.href="http://localhost:8080/Projet_JEE/api/DJ/Suppression?ID_DJ="+ID_DJ;
+		});
+		
 		
 		tr.appendChild(td_id);
 		tr.appendChild(td_nom);

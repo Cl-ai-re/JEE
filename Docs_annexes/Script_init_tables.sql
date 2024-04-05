@@ -1,6 +1,4 @@
-drop database Projet_JEE_DJ;
-create database Projet_JEE_DJ;
-use Projet_JEE_DJ;
+use info_nickf_schema;
 
 CREATE TABLE DJ
 (

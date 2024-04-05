@@ -12,7 +12,7 @@ public class DJ {
 	private Integer Actif;
 	
 	
-	public DJ(Integer Id, String Nom,String Prenom,String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
+	public DJ(Integer Id, String Nom, String Prenom, String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
 		this.ID_DJ = Id;
 		this.Nom = Nom;
 		this.Prenom = Prenom;
@@ -24,7 +24,7 @@ public class DJ {
 		this.Actif = Actif;
 	}
 
-	public DJ(String Nom,String Prenom,String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
+	public DJ(String Nom, String Prenom, String Pseudo, String DateNaissance, String LieuResidence, String Continent, String StyleMusical, Integer Actif) {
 		this.ID_DJ = -1; // L'ID sera défini dans la base à l'ajout par auto-incrément.
 		this.Nom = Nom;
 		this.Prenom = Prenom;

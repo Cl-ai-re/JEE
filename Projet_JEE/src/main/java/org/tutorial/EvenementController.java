@@ -43,7 +43,20 @@ public class EvenementController {
 		}
 	}
 	
-	
-	
-	
+	@POST
+	@Path("/Ajout")
+	@Consumes("application/x-www-form-urlencoded")
+	public void createEvenement(@FormParam("Date_Evenement") Date Date_Evenement, @FormParam("Debut") Integer Debut, @FormParam("Fin") Integer Fin, @FormParam("Pseudo_DJ") String Pseudo_DJ, @FormParam("Nom_Lieu") String Nom_Lieu) {
+		Event nouveau_Evenement = new Event (Date_Evenement, Debut, Fin, Pseudo_DJ, Nom_Lieu);
+		System.out.println(Date_Evenement);
+		System.out.println(Debut);
+		System.out.println(Fin);
+		System.out.println(Pseudo_DJ);
+		System.out.println(Nom_Lieu);
+		try {
+			EvenementDAOImpl.insertEvenement(nouveau_Evenement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

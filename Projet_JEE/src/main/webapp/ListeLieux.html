@@ -1,0 +1,135 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<link href="./CSS/style.css" rel="stylesheet" type="text/css" />
+<head>
+
+<script>
+function loadLieu(url) {
+	fetch(url)
+	.then(response => response.json())
+	.then(response => process(response))
+	.catch(error => alert("Erreur : " + error));
+}
+
+
+
+function process(Lieux) {
+	var Lieuxlist = document.getElementById("Lieulist");
+	
+	if (Lieulist.hasChildNodes()) {
+		Lieulist.removeChild(Lieulist.firstChild);
+	}
+	
+	var menu = document.createElement("table");
+	Lieulist.appendChild(menu);
+	
+	var tr_menu = document.createElement("tr");
+	
+	var td_DJ = document.createElement("button");
+	td_DJ.append("DJ");
+	td_DJ.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeDJ.html";
+	});
+	var td_Evenements = document.createElement("button");
+	td_Evenements.append("Evenements");
+	td_Evenements.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeEvenements.html";
+	});
+	var td_Lieux = document.createElement("button");
+	td_Lieux.append("Lieux");
+	td_Lieux.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeLieux.html";
+	});
+	
+	tr_menu.appendChild(td_DJ);
+	tr_menu.appendChild(td_Evenements);
+	tr_menu.appendChild(td_Lieux);
+	
+	menu.appendChild(tr_menu);
+	
+
+	
+
+	
+	var table = document.createElement("table");
+	Lieulist.appendChild(table);
+	
+	var tr_en_tete = document.createElement("tr");
+	
+	var td_ID_Lieu_en_tete = document.createElement("td");
+	td_ID_Lieu_en_tete.append("ID_Lieu");
+	var td_Nom_Lieu_en_tete = document.createElement("td");
+	td_Nom_Lieu_en_tete.append("Nom_Lieu");
+	var td_Ville_en_tete = document.createElement("td");
+	td_Ville_en_tete.append("Ville");
+	var td_Pays_en_tete = document.createElement("td");
+	td_Pays_en_tete.append("Pays");
+	var td_Continent_en_tete = document.createElement("td");
+	td_Continent_en_tete.append("Continent");
+
+	
+	tr_en_tete.appendChild(td_ID_Lieu_en_tete);
+	tr_en_tete.appendChild(td_Nom_Lieu_en_tete);
+	tr_en_tete.appendChild(td_Ville_en_tete);
+	tr_en_tete.appendChild(td_Pays_en_tete);
+	tr_en_tete.appendChild(td_Continent_en_tete);
+	
+	table.appendChild(tr_en_tete);
+	
+	console.log(Lieux);
+	for (var Lieu of Lieux) {
+		console.log(Lieu);
+		var tr = document.createElement("tr");
+		
+		var td_ID_Lieu = document.createElement("td");
+		td_ID_Lieu.append(Lieu.ID_Lieu);
+		var td_Nom_Lieu = document.createElement("td");
+		td_Nom_Lieu.append(Lieu.Nom_Lieu);
+		var td_Ville = document.createElement("td");
+		td_Ville.append(Lieu.Ville);
+		var td_Pays = document.createElement("td");
+		td_Pays.append(Lieu.Pays);
+		var td_Continent = document.createElement("td");
+		td_Continent.append(Lieu.Continent);
+
+
+		tr.appendChild(td_ID_Lieu);
+		tr.appendChild(td_Nom_Lieu);
+		tr.appendChild(td_Ville);
+		tr.appendChild(td_Pays);
+		tr.appendChild(td_Continent);
+		
+		table.appendChild(tr);
+	}
+}
+
+
+</script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">4700.00000000000</mso:Order>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:ContentTypeId msdt:dt="string">0x010100CECC21A3AFC6F54C9B75756AF591E856</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+<title>Projet JEE Team Nick Fury</title></head>
+<body onload="loadLieu('/Projet_JEE/api/Lieu/Liste')">
+
+
+<table>
+<tr>
+<td> <h1>Liste des Lieux</h1>  </td>
+</tr>
+</table>
+
+<div id="Lieulist"></div>
+
+</body>
+</html>

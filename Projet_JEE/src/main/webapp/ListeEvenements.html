@@ -1,0 +1,143 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<link href="./CSS/style.css" rel="stylesheet" type="text/css" />
+<head>
+
+<script>
+function loadEvenement(url) {
+	fetch(url)
+	.then(response => response.json())
+	.then(response => process(response))
+	.catch(error => alert("Erreur : " + error));
+}
+
+
+
+function process(Evenements) {
+	var Evenementlist = document.getElementById("Evenementlist");
+	
+	if (Evenementlist.hasChildNodes()) {
+		Evenementlist.removeChild(Evenementlist.firstChild);
+	}
+	
+	var menu = document.createElement("table");
+	Evenementlist.appendChild(menu);
+	
+	var tr_menu = document.createElement("tr");
+	
+	var td_DJ = document.createElement("button");
+	td_DJ.append("DJ");
+	td_DJ.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeDJ.html";
+	});
+	var td_Evenements = document.createElement("button");
+	td_Evenements.append("Evenements");
+	td_Evenements.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeEvenements.html";
+	});
+	var td_Lieux = document.createElement("button");
+	td_Lieux.append("Lieux");
+	td_Lieux.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeLieux.html";
+	});
+	
+	tr_menu.appendChild(td_DJ);
+	tr_menu.appendChild(td_Evenements);
+	tr_menu.appendChild(td_Lieux);
+	
+	menu.appendChild(tr_menu);
+	
+	var nouv_Evenement = document.createElement("button");
+	nouv_Evenement.textContent = 'Ajouter un evenement';
+	Evenementlist.appendChild(nouv_Evenement);
+	
+	nouv_Evenement.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/creationEvenement.html";
+	});
+	
+	var table = document.createElement("table");
+	Evenementlist.appendChild(table);
+	
+	var tr_en_tete = document.createElement("tr");
+	
+	var td_ID_Evenement_en_tete = document.createElement("td");
+	td_ID_Evenement_en_tete.append("ID_Evenement");
+	var td_Date_Evenement_en_tete = document.createElement("td");
+	td_Date_Evenement_en_tete.append("Date_Evenement");
+	var td_Debut_en_tete = document.createElement("td");
+	td_Debut_en_tete.append("Debut");
+	var td_Fin_en_tete = document.createElement("td");
+	td_Fin_en_tete.append("Fin");
+	var td_ID_DJ_en_tete = document.createElement("td");
+	td_ID_DJ_en_tete.append("ID_DJ");
+	var td_ID_Lieu_en_tete = document.createElement("td");
+	td_ID_Lieu_en_tete.append("ID_Lieu");
+	
+	tr_en_tete.appendChild(td_ID_Evenement_en_tete);
+	tr_en_tete.appendChild(td_Date_Evenement_en_tete);
+	tr_en_tete.appendChild(td_Debut_en_tete);
+	tr_en_tete.appendChild(td_Fin_en_tete);
+	tr_en_tete.appendChild(td_ID_DJ_en_tete);
+	tr_en_tete.appendChild(td_ID_Lieu_en_tete);
+	
+	table.appendChild(tr_en_tete);
+	
+	console.log(Evenements);
+	for (var Evenement of Evenements) {
+		console.log(Evenement);
+		var tr = document.createElement("tr");
+		
+		var td_ID_Evenement = document.createElement("td");
+		td_ID_Evenement.append(Evenement.ID_Evenement);
+		var td_Date_Evenement = document.createElement("td");
+		td_Date_Evenement.append(Evenement.Date_Evenement);
+		var td_Debut = document.createElement("td");
+		td_Debut.append(Evenement.Debut);
+		var td_Fin = document.createElement("td");
+		td_Fin.append(Evenement.Fin);
+		var td_ID_DJ = document.createElement("td");
+		td_ID_DJ.append(Evenement.ID_DJ);
+		var td_ID_Lieu = document.createElement("td");
+		td_ID_Lieu.append(Evenement.ID_Lieu);
+
+		tr.appendChild(td_ID_Evenement);
+		tr.appendChild(td_Date_Evenement);
+		tr.appendChild(td_Debut);
+		tr.appendChild(td_Fin);
+		tr.appendChild(td_ID_DJ);
+		tr.appendChild(td_ID_Lieu);
+		
+		table.appendChild(tr);
+	}
+}
+
+
+</script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">4700.00000000000</mso:Order>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:ContentTypeId msdt:dt="string">0x010100CECC21A3AFC6F54C9B75756AF591E856</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+<title>Projet JEE Team Nick Fury</title></head>
+<body onload="loadEvenement('/Projet_JEE/api/Evenement/Liste')">
+
+
+<table>
+<tr>
+<td> <h1>Liste des evenements</h1>  </td>
+</tr>
+</table>
+
+<div id="Evenementlist"></div>
+
+</body>
+</html>

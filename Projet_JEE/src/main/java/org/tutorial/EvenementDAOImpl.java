@@ -59,7 +59,7 @@ public class EvenementDAOImpl implements EvenementDAO{
 	}
 	
 	// Méthode pour insérer un nouveau Evenement dans la base de données
-	public void insertEvenement(Evenement Evenement) {
+	public void insertEvenement(Event Evenement) {
 	    Connection connection = null;
 	    PreparedStatement statement = null;
 	    
@@ -69,15 +69,14 @@ public class EvenementDAOImpl implements EvenementDAO{
 	            throw new SQLException("La connexion à la base de données a échoué.");
 	        }
 	        
-	        String query = "Insert into Evenement (Nom, Prenom, Pseudo, Date_de_Naissance, Adresse, Continent, Style, Actif) values (?, ?, ?, ?, ?, ?, ?, ?)";
+	        String query = "CALL ajout_evenement (?, ?, ?, ?, ?)";
 	        
 	        statement = connection.prepareStatement(query);
-	        statement.setInt(1, Evenement.getID_Evenement());
-	        statement.setString(2, Evenement.getDate_Evenement().toString());
-	        statement.setInt(3, Evenement.getDebut());
-	        statement.setInt(4, Evenement.getFin());
-	        statement.setInt(5, Evenement.getID_DJ());
-	        statement.setInt(6, Evenement.getID_Lieu());
+	        statement.setString(1, Evenement.getDate_Evenement().toString());
+	        statement.setInt(2, Evenement.getDebut());
+	        statement.setInt(3, Evenement.getFin());
+	        statement.setString(4, Evenement.getPseudo_DJ());
+	        statement.setString(5, Evenement.getNom_Lieu());
 	        
 	        int rowsInserted = statement.executeUpdate();
 	        if (rowsInserted > 0) {

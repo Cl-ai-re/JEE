@@ -1,0 +1,186 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<link href="./CSS/style.css" rel="stylesheet" type="text/css" />
+<head>
+
+<script>
+function loadDJ(url) {
+	fetch(url)
+	.then(response => response.json())
+	.then(response => process(response))
+	.catch(error => alert("Erreur : " + error));
+}
+
+
+
+function process(DJ) {
+	var DJlist = document.getElementById("DJlist");
+	
+	if (DJlist.hasChildNodes()) {
+		DJlist.removeChild(DJlist.firstChild);
+	}
+	
+	var menu = document.createElement("table");
+	DJlist.appendChild(menu);
+	
+	var tr_menu = document.createElement("tr");
+	
+	var td_DJ = document.createElement("button");
+	td_DJ.append("DJ");
+	td_DJ.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeDJ.html";
+	});
+	var td_Evenements = document.createElement("button");
+	td_Evenements.append("Evenements");
+	td_Evenements.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeEvenements.html";
+	});
+	var td_Lieux = document.createElement("button");
+	td_Lieux.append("Lieux");
+	td_Lieux.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/ListeLieux.html";
+	});
+	
+	tr_menu.appendChild(td_DJ);
+	tr_menu.appendChild(td_Evenements);
+	tr_menu.appendChild(td_Lieux);
+	
+	menu.appendChild(tr_menu);
+	
+	var nouv_DJ = document.createElement("button");
+	nouv_DJ.textContent = 'Ajouter un DJ';
+	DJlist.appendChild(nouv_DJ);
+	
+	nouv_DJ.addEventListener('click', function(e){
+		document.location.href="http://localhost:8080/Projet_JEE/creationDJ.html";
+	});
+	
+	var table = document.createElement("table");
+	DJlist.appendChild(table);
+	
+	var tr_en_tete = document.createElement("tr");
+	
+	var td_nom_en_tete = document.createElement("td");
+	td_nom_en_tete.append("Nom");
+	var td_prenom_en_tete = document.createElement("td");
+	td_prenom_en_tete.append("Prenom");
+	var td_pseudo_en_tete = document.createElement("td");
+	td_pseudo_en_tete.append("Pseudo");
+	var td_date_de_naissance_en_tete = document.createElement("td");
+	td_date_de_naissance_en_tete.append("Date_de_Naissance");
+	var td_adresse_en_tete = document.createElement("td");
+	td_adresse_en_tete.append("Adresse");
+	var td_continent_en_tete = document.createElement("td");
+	td_continent_en_tete.append("Continent");
+	var td_style_en_tete = document.createElement("td");
+	td_style_en_tete.append("Style");
+	var td_mod_sup_en_tete = document.createElement("td");
+	td_mod_sup_en_tete.append("Modif/Sup");
+
+	tr_en_tete.appendChild(td_nom_en_tete);
+	tr_en_tete.appendChild(td_prenom_en_tete);
+	tr_en_tete.appendChild(td_pseudo_en_tete);
+	tr_en_tete.appendChild(td_date_de_naissance_en_tete);
+	tr_en_tete.appendChild(td_adresse_en_tete);
+	tr_en_tete.appendChild(td_continent_en_tete);
+	tr_en_tete.appendChild(td_style_en_tete);
+	tr_en_tete.appendChild(td_mod_sup_en_tete);
+	
+	table.appendChild(tr_en_tete);
+	
+	console.log(DJ);
+	for (var dj of DJ) {
+		console.log(dj);
+		if (dj.Actif == 1){
+			var tr = document.createElement("tr");
+			
+			var td_nom = document.createElement("td");
+			td_nom.append(dj.Nom);
+			var td_prenom = document.createElement("td");
+			td_prenom.append(dj.Prenom);
+			var td_pseudo = document.createElement("td");
+			td_pseudo.append(dj.Pseudo);
+			var td_date_de_naissance = document.createElement("td");
+			td_date_de_naissance.append(dj.Date_de_Naissance);
+			var td_adresse = document.createElement("td");
+			td_adresse.append(dj.Adresse);
+			var td_continent = document.createElement("td");
+			td_continent.append(dj.Continent);
+			var td_style = document.createElement("td");
+			td_style.append(dj.Style);
+			
+			var boutonModif = document.createElement('button');
+			boutonModif.textContent = 'Modifier';
+			boutonModif.setAttribute("id", dj.ID_DJ);
+			
+			boutonModif.addEventListener('click', function(e){
+				var ID_DJ = this.getAttribute("id")
+				document.location.href = "http://localhost:8080/Projet_JEE/modificationDJ.html?id=" + encodeURIComponent(ID_DJ);
+				});
+			
+			var boutonSup = document.createElement('button');
+			boutonSup.textContent = 'Supprimer';
+			boutonSup.setAttribute("id", dj.ID_DJ);
+			
+			boutonSup.addEventListener('click', function(e){
+				var ID_DJ = this.getAttribute("id");
+				document.location.href="http://localhost:8080/Projet_JEE/api/DJ/Suppression?ID_DJ="+ID_DJ;
+			});
+			
+			
+			tr.appendChild(td_nom);
+			tr.appendChild(td_prenom);
+			tr.appendChild(td_pseudo);
+			tr.appendChild(td_date_de_naissance);
+			tr.appendChild(td_adresse);
+			tr.appendChild(td_continent);
+			tr.appendChild(td_style);
+			
+			tr.appendChild(boutonModif);
+			tr.appendChild(boutonSup);
+			
+			// A modifier
+			boutonModif.addEventListener('click', function(e){
+			
+			});
+			
+			table.appendChild(tr);
+		}
+	}
+}
+
+
+function searchByName() {
+	//TODO
+}
+
+
+</script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">4700.00000000000</mso:Order>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Alexandre Chennebault</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:ContentTypeId msdt:dt="string">0x010100CECC21A3AFC6F54C9B75756AF591E856</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+<title>Projet JEE Team Nick Fury</title></head>
+<body onload="loadDJ('/Projet_JEE/api/DJ/Liste')">
+
+
+<table>
+<tr>
+<td> <h1>Liste des DJ</h1>  </td>
+</tr>
+</table>
+
+<div id="DJlist"></div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Créer un evenement</title>
+</head>
+
+<body>
+
+<table>
+<tr>
+<th> <a href='creationDJ.html'>Ajouter un DJ</a></th>
+<th> <a href='creationEvenement.html'>Ajouter un évènement</a></th>
+<th> <a href='ListeDJ.html'>Afficher les DJ</a></th>
+<th> <a href='ListeEvenements.html'>Afficher les evenements</a></th>
+<th> <a href='ListeLieux.html'>Afficher les lieux</a></th>
+<th> <a href='Top5.html'>Afficher le top 5 des DJ</a></th>
+</tr>
+</table>
+
+
+<div id="Nouvel_Événement"></div>
+</body>
+
+</html>
+
+<form action="/Projet_JEE/api/Evenement/Ajout" method="POST">
+  <ul>
+    <li>
+      <label for="Date_Evenement">Date : </label>
+      <input type="Date" id="Date_Evenement" name="Date_Evenement" />
+    </li>
+    <li>
+      <label for="Debut">Debut : </label>
+      <input type="Number" id="Debut" name="Debut" />
+    </li>
+    <li>
+      <label for="Fin">Fin : </label>
+      <input type="Number" id="Fin" name="Fin" />
+    </li>
+	<li>
+      <label for="Pseudo_DJ">DJ : </label>
+      <input type="text" id="Pseudo_DJ" name="Pseudo_DJ" />
+    </li>
+    <li>
+      <label for="Nom_Lieu">Lieu : </label>
+      <input type="text" id="Nom_Lieu" name="Nom_Lieu" />
+    </li>
+
+
+   <input type="submit" id="submitButton" />
+
+  </ul>
+</form>

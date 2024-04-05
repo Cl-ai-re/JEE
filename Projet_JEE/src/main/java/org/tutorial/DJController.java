@@ -20,8 +20,6 @@ import jakarta.ws.rs.core.MediaType;
 
 @Path("/DJ")
 public class DJController {
-
-	//@QueryParam("Nom") String Nom à mettre dans les variables d'entrée d'une méthode
 	
 	private DJDAOImpl DJDAOImpl = new DJDAOImpl();
 	@GET

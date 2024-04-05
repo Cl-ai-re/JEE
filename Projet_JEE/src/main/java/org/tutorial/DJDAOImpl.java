@@ -2,6 +2,7 @@ package org.tutorial;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,8 +44,32 @@ public class DJDAOImpl implements DJDAO{
     }
 	
 	
+	public List<String> findByQueryPseudo(String query){
+        List<String> liste_DJ = new ArrayList<>();
+        
+        Connection connection = DBManager.getInstance().getConnection();
+        Statement statement;
+		ResultSet rs;
+		
+        try {
+        	statement = connection.createStatement();
+			rs = statement.executeQuery(query);
+			for (var i = 1; i <= 5; i++) {
+				System.out.println(rs.getString(i));
+				liste_DJ.add(rs.getString(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return liste_DJ;
+    }
+	
 	public List<DJ> findByAll() {
 		return findByQueryDJ("select * from DJ");
+	}
+	
+	public List<String> Top5() {
+		return findByQueryPseudo("CALL Top5();");
 	}
 	
 	public DJ findById(Integer ID_DJ) {

@@ -63,3 +63,8 @@ BEGIN
 END//
 
 delimiter ;
+
+CALL ajout_evenement('2024-04-11','2','4','Pseudo_DJ_1','Berghain');
+CALL ajout_evenement('2024-04-15','2','4','Pseudo_DJ_3','Space');
+CALL ajout_evenement('2024-04-19','2','4','Pseudo_DJ_5','Pacha');
+CALL ajout_evenement('2024-04-23','2','4','Pseudo_DJ_6','Ushuaïa');
